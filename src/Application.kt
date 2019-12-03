@@ -11,6 +11,8 @@ import io.ktor.websocket.*
 import io.ktor.http.cio.websocket.*
 import java.time.*
 import com.fasterxml.jackson.databind.*
+import com.google.firebase.FirebaseApp
+import com.pickle.punktual.firebase.FirebaseManager
 import com.pickle.punktual.position.position
 import com.pickle.punktual.user.user
 import io.ktor.jackson.*
@@ -40,6 +42,8 @@ fun Application.module(testing: Boolean = false) {
             enable(SerializationFeature.INDENT_OUTPUT)
         }
     }
+
+    FirebaseApp.initializeApp(FirebaseManager.options)
 
     val client = HttpClient(CIO) {
     }

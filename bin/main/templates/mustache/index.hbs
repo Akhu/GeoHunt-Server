@@ -9,17 +9,35 @@
 <div uk-grid>
 
 <div class="uk-container">
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+
+            <th>UUID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Position History</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#userList }}
+    <tr>
+                <td>{{username}}</td>
+                <td>{{type}}</td>
+                <td><pre>#{{id}}</pre></td>
+                <td>
+                    <ul>
+                    {{#positionHistory}}
+                    <li>{{date}} @ {{position}}</li>
+                    {{/positionHistory}}
+                     </ul>
+                </td>
+    </tr>
+    {{/userList}}
+    </tbody>
+</table>
 <ul>
-{{#userList }}
-<li>
-    <h3>{{username}} is {{type}} (#{{id}}) </h3>
-    <ul>
-    {{#positionHistory}}
-        <li> {{this}} </li>
-    {{/positionHistory}}
-    </ul>
-</li>
-{{/userList}}
+
 </ul>
 </div>
 <div class="uk

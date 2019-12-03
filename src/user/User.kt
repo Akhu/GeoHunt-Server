@@ -21,8 +21,8 @@ data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.
         get() = positionList
 
     fun addPosition(position: Position){
-        if(positionList.size > 5){
-            positionList.dropLast(1)
+        if(positionList.size >= 5){
+            positionList = positionList.dropLast(1) as ArrayList<PositionHistory>
         }
         positionList.add(PositionHistory(DateTime.now(), position))
     }

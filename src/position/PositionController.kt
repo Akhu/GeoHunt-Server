@@ -32,4 +32,16 @@ fun Routing.position() {
             call.respond(HttpStatusCode.BadRequest, exception)
         }
     }
+
+    post("/position/fence/enter") {
+        call.request.queryParameters["userId"]?.let { userId ->
+            UserStorage
+                .userList
+                .find {
+                    it.id == UUID.fromString(userId)
+                }?.let {
+
+                }
+        }
+    }
 }
