@@ -1,0 +1,41 @@
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "id" : "19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc",
+  "username" : "Fanny",
+  "type" : "TEACHER"
+}
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "id" : "19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc",
+  "username" : "Fanny"
+}
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "caca" : "pon"
+}
+
+###
+
+###
+
+POST http://localhost:8080/position/register?userId=19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc
+Content-Type: application/json
+
+{
+    "latitude" : 45.293201302,
+    "longitude" : 6.29302839
+}
+
+###
