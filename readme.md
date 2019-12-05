@@ -1,5 +1,14 @@
 # Punktual project for Campus
 
+## Before starting the project
+### FCM Admin SDK
+
+Please push the env variable `GOOGLE_APPLICATION_CREDENTIALS` as key and as value the URI of the google credentials json file for your Firebase project (Service account)
+
+see https://firebase.google.com/docs/cloud-messaging/server#firebase-admin-sdk-for-fcm for more informations
+
+### ...
+
 ## Todos: 
 1. Handle login
 2. Ask for location permissions

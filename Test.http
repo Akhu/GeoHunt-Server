@@ -1,3 +1,7 @@
+GET http://localhost:8080/notificationFCM?token=fUfyI4VdjgU:APA91bGXGEWa8kDciZGpHyCacGodA6Y3EMOO4KYKkgxRjrR2wnmhtkBKyEqDv92dLhQbOt7V9K5vcmf11ZE5shm08AZlEkSSroFCM8oYHFQ-HL5GNw-w6fpmNt8qL0TotEPJ4vkv0J72
+
+###
+
 POST http://localhost:8080/register
 Content-Type: application/json
 
