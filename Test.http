@@ -2,14 +2,25 @@ GET http://localhost:8080/notificationFCM?token=fUfyI4VdjgU:APA91bGXGEWa8kDciZGp
 
 ###
 
+GET http://localhost:8080/userList
+
+###
+
 POST http://localhost:8080/register
 Content-Type: application/json
 
 {
-  "id" : "19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc",
-  "username" : "Fanny",
-  "type" : "TEACHER"
+  "username" : "Fanny"
 }
+
+> {%
+client.global.set("id",response.body.id);
+client.global.set("username",response.body.username);
+client.global.set("type",response.body.type);
+//client.global.set("pushToken",response.body.pushToken);
+//client.global.set("imageUrl",response.body.imageUrl);
+//client.global.set("connected",response.body.connected);
+%}
 
 ###
 
@@ -17,13 +28,13 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "id" : "19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc",
-  "username" : "Fanny"
+  "id" : "{{id}}",
+  "username" : "{{username}}"
 }
 
 ###
 
-POST http://localhost:8080/position/register?userId=19f7c36a-35e9-41ff-8a72-0a75d6e3a5dc
+POST http://localhost:8080/position/register?userId={{id}}
 Content-Type: application/json
 
 {

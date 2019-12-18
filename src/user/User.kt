@@ -13,6 +13,7 @@ enum class UserType {
 }
 
 data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.STUDENT, val username: String, val pushToken: String? = null, val imageUrl: String? = null) {
+    var isConnected = false
     //Joda time used : https://www.joda.org/joda-time/quickstart.html
     //Each user will get a position list, but we remember only a few of it's declared positions
     private var positionList: ArrayList<PositionHistory> = ArrayList()
@@ -26,6 +27,7 @@ data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.
         }
         positionList.add(PositionHistory(DateTime.now(), position))
     }
+
 }
 
 data class UserLogin(val id: UUID, val username: String)

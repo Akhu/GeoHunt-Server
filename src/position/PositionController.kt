@@ -40,7 +40,11 @@ fun Routing.position() {
                 .find {
                     it.id == UUID.fromString(userId)
                 }?.let {
-
+                    try {
+                        it.addPosition(call.receive())
+                    } catch (exception: Exception){
+                        call.respond(HttpStatusCode.BadRequest, exception)
+                    }
                 }
         }
     }
