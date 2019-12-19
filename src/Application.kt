@@ -37,6 +37,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
+
     install(Mustache) {
         mustacheFactory = DefaultMustacheFactory("templates/mustache")
     }
@@ -74,30 +75,15 @@ fun Application.module(testing: Boolean = false) {
 
         get("/notificationFCM"){
 
-            var registrationToken = "ehcBEUcupLo:APA91bGjtoGnn03NwWsHBTBfiV8h2HFeHFdWCly2aGPa92TIuT9CgLKyBlzI9Jn9rpREotakrnd4SAs9FQVW_XSRH7xImt49AccZbhFc9I9z9uTQf6vGv5AELPNPs_JZKBtHKwCdg6fb"
+            var registrationToken = "ef3bGfoE1BE:APA91bHYI-5V9Ehzp5mUKSd74B89TX9bbXT06JwOejsLXGU5CM4MrxmCWWU88LwlVrQ2T4pk1V2s0mOz8FLsyGILcRlekQN0CuJngQ2Cl9ce3XsDGyKhDqyS55UCSw-EJbmmAV_Uj5JW"
 
             call.request.queryParameters["token"]?.let {
                 registrationToken = it
             }
 
-            log.info("Push token for this request to FCM $registrationToken")
-
-            // See documentation on defining a message payload.
-            // See documentation on defining a message payload.
-            val message: Message = Message.builder()
-                .putData("score", "850")
-                .putData("time", "2:45")
-                .setToken(registrationToken)
-                .build()
-
-            // Send a message to the device corresponding to the provided
-            // registration token.
-            // Send a message to the device corresponding to the provided
-            // registration token.
-            val response = FirebaseMessaging.getInstance().send(message)
+            val response = FirebaseManager.sendNotificationToDevice(registrationToken, "Hello World")
             // Response is a message ID string.
             // Response is a message ID string.
-            println("")
             call.respondText("Successfully sent message: $response")
         }
 

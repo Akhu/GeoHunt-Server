@@ -1,5 +1,6 @@
 package com.pickle.punktual.position
 
+import com.pickle.punktual.firebase.FirebaseManager
 import com.pickle.punktual.user.UserStorage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -14,13 +15,18 @@ fun Routing.position() {
     post("/position/register") {
         try {
             val position = call.receive<Position>()
+            val shouldNotifyOther = true
             call.request.queryParameters["userId"]?.let { userId ->
                 UserStorage
                     .userList
                     .find {
                         it.id == UUID.fromString(userId)
-                    }?.let {
-                        it.addPosition(position)
+                    }?.let { currentUser ->
+                        currentUser.addPosition(position)
+                        if(shouldNotifyOther) {
+                            FirebaseManager.sendUserArrivingNotificationToTeam(currentUser, UserStorage.userList)
+                        }
+                        //Todo: change return here
                         call.respond(it)
                     }?: run {
                         call.respond(HttpStatusCode.NotFound, "User not exists")
