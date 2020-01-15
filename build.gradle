@@ -5,6 +5,7 @@ buildscript {
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
@@ -14,6 +15,8 @@ apply plugin: 'application'
 group 'com.pickle.punktual'
 version '0.0.1'
 mainClassName = "io.ktor.server.netty.EngineMain"
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
@@ -47,4 +50,18 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-admin:6.11.0'
 
+}
+
+// tell the jar which class to startup in.
+jar {
+    zip64 = true
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+}
+
+shadowJar {
+    baseName = 'punktual-server'
+    classifier = null
+    version = null
 }

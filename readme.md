@@ -28,3 +28,6 @@ see https://firebase.google.com/docs/cloud-messaging/server#firebase-admin-sdk-f
 15. Improvments : Detecting the type of transport user for a user + send to server
 
 Link with a server that is able to send notification to other registered devices/
+
+
+http://d3cima.tech:8080/userList

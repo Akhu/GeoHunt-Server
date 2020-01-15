@@ -1,8 +1,8 @@
 package com.pickle.punktual.user
 
+import com.pickle.punktual.position.LocationType
 import com.pickle.punktual.position.Position
 import com.pickle.punktual.position.PositionHistory
-import javafx.geometry.Pos
 import org.joda.time.DateTime
 import java.util.*
 import kotlin.collections.ArrayList
@@ -21,13 +21,12 @@ data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.
     val positionHistory : List<PositionHistory>
         get() = positionList
 
-    fun addPosition(position: Position){
+    fun addPosition(position: Position, type: LocationType){
         if(positionList.size >= 5){
             positionList = positionList.dropLast(1) as ArrayList<PositionHistory>
         }
-        positionList.add(PositionHistory(DateTime.now(), position))
+        positionList.add(PositionHistory(DateTime.now(), position, type))
     }
-
 }
 
 data class UserLogin(val id: UUID, val username: String)
