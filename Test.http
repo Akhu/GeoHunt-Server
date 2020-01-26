@@ -10,7 +10,8 @@ POST http://localhost:8080/register
 Content-Type: application/json
 
 {
-  "username" : "Fanny"
+  "username" : "Fanny",
+  "pushToken" : "12345"
 }
 
 > {%
@@ -28,18 +29,30 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "id" : "{{id}}",
-  "username" : "{{username}}"
+  "username" : "Fanny"
 }
+
+> {%
+client.global.set("id",response.body.id);
+client.global.set("username",response.body.username);
+client.global.set("type",response.body.type);
+//client.global.set("pushToken",response.body.pushToken);
+//client.global.set("imageUrl",response.body.imageUrl);
+//client.global.set("connected",response.body.connected);
+%}
 
 ###
 
-POST http://localhost:8080/position/register?userId={{id}}
+POST http://localhost:8080/position/register/PAPETERIE?userId={{id}}
 Content-Type: application/json
 
 {
     "latitude" : 45.293201302,
     "longitude" : 6.29302839
 }
+
+###
+
+GET http://localhost:8080/users
 
 ###

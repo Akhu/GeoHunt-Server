@@ -1,10 +1,12 @@
 package com.pickle.punktual
 
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.github.mustachejava.DefaultMustacheFactory
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
+import java.time.*
 import com.pickle.punktual.firebase.FirebaseManager
 import com.pickle.punktual.position.position
 import com.pickle.punktual.user.user
@@ -52,6 +54,8 @@ fun Application.module(testing: Boolean = false) {
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)
+
+            registerModule(JodaModule())
         }
     }
 

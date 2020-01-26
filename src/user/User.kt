@@ -1,5 +1,6 @@
 package com.pickle.punktual.user
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.pickle.punktual.position.LocationType
 import com.pickle.punktual.position.Position
 import com.pickle.punktual.position.PositionHistory
@@ -11,8 +12,16 @@ import kotlin.collections.ArrayList
 enum class UserType {
     STUDENT, TEACHER
 }
-
-data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.STUDENT, val username: String, val pushToken: String? = null, val imageUrl: String? = null) {
+data class UserTest(
+    val username: String,
+    var pushToken: String? = null
+)
+data class User(
+    var id: UUID = UUID.randomUUID(),
+    val type: UserType = UserType.STUDENT,
+    override val username: String,
+    override var pushToken: String? = null,
+    val imageUrl: String? = null) : UserBasic {
     var isConnected = false
     //Joda time used : https://www.joda.org/joda-time/quickstart.html
     //Each user will get a position list, but we remember only a few of it's declared positions
@@ -29,4 +38,9 @@ data class User(val id: UUID = UUID.randomUUID(), val type: UserType = UserType.
     }
 }
 
-data class UserLogin(val id: UUID, val username: String)
+data class UserLogin(override var pushToken: String?, override val username: String) : UserBasic
+
+interface UserBasic {
+    val username: String
+    var pushToken: String?
+}

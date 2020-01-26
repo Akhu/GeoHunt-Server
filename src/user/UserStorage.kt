@@ -1,19 +1,34 @@
 package com.pickle.punktual.user
 
+import java.util.*
+
 object UserStorage {
-    fun findLogin(attemptedUser: UserLogin): User? {
-        return userList.find { (it.id == attemptedUser.id) && (it.username == attemptedUser.username) }
+
+    private fun findUser(user: UserBasic): Pair<Boolean, User?> {
+        userList.find { ( it.username.toLowerCase() == user.username.toLowerCase() ) }?.let {
+            return Pair(true, it)
+        }
+        return Pair(false, null)
     }
 
+    fun findLogin(attemptedUser: UserLogin): Pair<Boolean, User?> = findUser(attemptedUser)
 
-    fun registerUser(user: User) : Boolean {
-        if(userList.contains(user)){
-            return false
+
+    fun registerUser(user: User) : User? {
+
+        val result = findUser(user)
+        if (result.first){
+            //User already exists bye.
+            return null
         }
 
         userList.add(user)
-        return true
+        return user
     }
 
-    val userList = ArrayList<User>()
+    fun disconnectUser(userId: String) {
+        userList.removeIf { it.id.toString() == userId }
+    }
+
+    val userList = mutableListOf<User>()
 }
